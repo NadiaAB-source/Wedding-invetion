@@ -161,7 +161,7 @@ window.addEventListener("load",()=>{
 
         openInvitation();
 
-    },1000);
+    },800);
 
 });
 
@@ -258,7 +258,7 @@ function breakSeal(){
 
         ],{
 
-            duration:700,
+            duration:500,
 
             easing:"ease-in-out",
 
