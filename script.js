@@ -677,8 +677,7 @@ if(card){
 "assets/images/leaf2.png",
 "assets/images/leaf3.png",
 "assets/images/leaf4.png",
-"assets/images/peony1.png",
-"assets/images/peony2.png",
+
 "assets/images/peony3.png",
 "assets/images/peony4.png"
 
@@ -730,8 +729,7 @@ const flowerContainer=document.querySelector(".floating-flowers");
 
 const flowerImages=[
 
-"assets/images/peony1.png",
-"assets/images/peony2.png",
+
 "assets/images/leaf1.png",
 "assets/images/leaf2.png",
 "assets/images/leaf3.png",
