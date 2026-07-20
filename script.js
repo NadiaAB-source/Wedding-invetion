@@ -161,7 +161,7 @@ window.addEventListener("load",()=>{
 
         openInvitation();
 
-    },2000);
+    },1000);
 
 });
 
