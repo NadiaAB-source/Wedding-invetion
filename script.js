@@ -67,7 +67,7 @@ musicBtn.addEventListener("click",()=>{
 
     else{
 
-        startMusic();
+        musicBtn.style.display="block";
 
     }
 
@@ -78,7 +78,7 @@ musicBtn.addEventListener("click",()=>{
 // ENVELOPE HOVER
 //==================================================
 
-envelope.addEventListener("mouseenter",()=>{
+f(window.matchMedia("(hover:hover)").matches){
 
     if(opened) return;
 
@@ -141,26 +141,23 @@ envelope.addEventListener("mouseleave",()=>{
 //==================================================
 // CLICK ONLY THE SEAL
 //==================================================
+window.addEventListener("load",()=>{
 
-seal.addEventListener("click",()=>{
+    setTimeout(()=>{
 
-    if(opened) return;
+        musicBtn.style.display="block";
 
-    opened = true;
+        if(openSound){
 
-    envelope.style.pointerEvents="none";
+            openSound.currentTime = 0;
 
-    startMusic();
+            openSound.play().catch(()=>{});
 
-    if(openSound){
+        }
 
-        openSound.currentTime = 0;
+        breakSeal();
 
-        openSound.play().catch(()=>{});
-
-    }
-
-    breakSeal();
+    },2000);
 
 });
 
