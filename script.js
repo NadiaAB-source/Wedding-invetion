@@ -161,10 +161,9 @@ window.addEventListener("load",()=>{
 
         openInvitation();
 
-    },1800);
+    },2000);
 
 });
-
 
 //==================================================
 // START SEQUENCE
@@ -174,13 +173,16 @@ function openInvitation(){
 
     if(opened) return;
 
-    opened=true;
+    opened = true;
 
-    envelope.style.pointerEvents="none";
+    envelope.style.pointerEvents = "none";
+
+    // Music (may be blocked on iPhone)
+    startMusic();
 
     if(openSound){
 
-        openSound.currentTime=0;
+        openSound.currentTime = 0;
 
         openSound.play().catch(()=>{});
 
@@ -190,12 +192,13 @@ function openInvitation(){
 
 }
 
-
 //==================================================
 // BREAK SEAL
 //==================================================
 
 function breakSeal(){
+
+    // Glow before breaking
 
     seal.animate([
 
@@ -203,44 +206,77 @@ function breakSeal(){
 
             transform:"translateX(-50%) scale(1)",
 
-            opacity:1
+            filter:"drop-shadow(0 0 0 rgba(212,175,55,0))"
 
         },
 
         {
 
-            transform:"translateX(-50%) scale(1.15)",
+            transform:"translateX(-50%) scale(1.08)",
 
-            opacity:1
-
-        },
-
-        {
-
-            transform:"translateX(-50%) scale(.15) rotate(180deg)",
-
-            opacity:0
+            filter:"drop-shadow(0 0 20px rgba(212,175,55,.8))"
 
         }
 
     ],{
 
-        duration:850,
-
-        easing:"ease-in-out",
+        duration:300,
 
         fill:"forwards"
 
     });
 
+    // Break animation
+
+    setTimeout(()=>{
+
+        seal.animate([
+
+            {
+
+                transform:"translateX(-50%) scale(1.08) rotate(0deg)",
+
+                opacity:1
+
+            },
+
+            {
+
+                transform:"translateX(-50%) scale(.9) rotate(-10deg)",
+
+                opacity:1
+
+            },
+
+            {
+
+                transform:"translateX(-50%) scale(.15) rotate(180deg)",
+
+                opacity:0
+
+            }
+
+        ],{
+
+            duration:700,
+
+            easing:"ease-in-out",
+
+            fill:"forwards"
+
+        });
+
+    },300);
+
+    // Open envelope after seal breaks
+
     setTimeout(()=>{
 
         openEnvelope();
 
-    },500);
+    },900);
 
 }
-
 
 //==================================================
 // OPEN ENVELOPE
