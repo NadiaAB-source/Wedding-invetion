@@ -4,6 +4,8 @@
 
 const hero = document.getElementById("hero");
 
+const invitation = document.getElementById("invitation");
+
 const envelope = document.querySelector(".envelope");
 
 const flap = document.querySelector(".flap");
@@ -11,8 +13,6 @@ const flap = document.querySelector(".flap");
 const seal = document.querySelector(".seal");
 
 const letter = document.querySelector(".letter");
-
-const invitation = document.getElementById("invitation");
 
 const music = document.getElementById("music");
 
@@ -29,25 +29,37 @@ let playing = false;
 // MUSIC
 //==================================================
 
-music.volume = .35;
+if(music){
+
+    music.volume = 0.35;
+
+}
 
 function startMusic(){
 
-    if(playing) return;
+    if(playing || !music) return;
 
     playing = true;
 
-    music.play().catch(()=>{});
+    music.play().then(()=>{
 
-    musicBtn.innerHTML="🔊";
+        musicBtn.innerHTML="🔊";
 
-    musicBtn.classList.add("playing");
+        musicBtn.classList.add("playing");
+
+    }).catch(()=>{
+
+        playing=false;
+
+    });
 
 }
 
 function stopMusic(){
 
-    playing = false;
+    if(!music) return;
+
+    playing=false;
 
     music.pause();
 
@@ -63,11 +75,9 @@ musicBtn.addEventListener("click",()=>{
 
         stopMusic();
 
-    }
+    }else{
 
-    else{
-
-        musicBtn.style.display="block";
+        startMusic();
 
     }
 
@@ -78,88 +88,107 @@ musicBtn.addEventListener("click",()=>{
 // ENVELOPE HOVER
 //==================================================
 
-f(window.matchMedia("(hover:hover)").matches){
+if(window.matchMedia("(hover:hover)").matches){
 
-    if(opened) return;
+    envelope.addEventListener("mouseenter",()=>{
 
-    envelope.animate([
+        if(opened) return;
 
-        {
+        envelope.animate([
 
-            transform:"translateY(0px)"
+            {
 
-        },
+                transform:"translateY(0px)"
 
-        {
+            },
 
-            transform:"translateY(-12px)"
+            {
 
-        }
+                transform:"translateY(-10px)"
 
-    ],{
+            }
 
-        duration:350,
+        ],{
 
-        fill:"forwards",
+            duration:300,
 
-        easing:"ease-out"
+            easing:"ease-out",
 
-    });
+            fill:"forwards"
 
-});
-
-
-envelope.addEventListener("mouseleave",()=>{
-
-    if(opened) return;
-
-    envelope.animate([
-
-        {
-
-            transform:"translateY(-12px)"
-
-        },
-
-        {
-
-            transform:"translateY(0px)"
-
-        }
-
-    ],{
-
-        duration:350,
-
-        fill:"forwards"
+        });
 
     });
 
-});
+    envelope.addEventListener("mouseleave",()=>{
+
+        if(opened) return;
+
+        envelope.animate([
+
+            {
+
+                transform:"translateY(-10px)"
+
+            },
+
+            {
+
+                transform:"translateY(0px)"
+
+            }
+
+        ],{
+
+            duration:300,
+
+            fill:"forwards"
+
+        });
+
+    });
+
+}
 
 
 //==================================================
-// CLICK ONLY THE SEAL
+// AUTO START
 //==================================================
+
 window.addEventListener("load",()=>{
 
     setTimeout(()=>{
 
-        musicBtn.style.display="block";
+        openInvitation();
 
-        if(openSound){
-
-            openSound.currentTime = 0;
-
-            openSound.play().catch(()=>{});
-
-        }
-
-        breakSeal();
-
-    },2000);
+    },1800);
 
 });
+
+
+//==================================================
+// START SEQUENCE
+//==================================================
+
+function openInvitation(){
+
+    if(opened) return;
+
+    opened=true;
+
+    envelope.style.pointerEvents="none";
+
+    if(openSound){
+
+        openSound.currentTime=0;
+
+        openSound.play().catch(()=>{});
+
+    }
+
+    breakSeal();
+
+}
 
 
 //==================================================
@@ -180,7 +209,7 @@ function breakSeal(){
 
         {
 
-            transform:"translateX(-50%) scale(1.2)",
+            transform:"translateX(-50%) scale(1.15)",
 
             opacity:1
 
@@ -188,7 +217,7 @@ function breakSeal(){
 
         {
 
-            transform:"translateX(-50%) scale(.2) rotate(180deg)",
+            transform:"translateX(-50%) scale(.15) rotate(180deg)",
 
             opacity:0
 
@@ -196,7 +225,7 @@ function breakSeal(){
 
     ],{
 
-        duration:800,
+        duration:850,
 
         easing:"ease-in-out",
 
@@ -204,9 +233,14 @@ function breakSeal(){
 
     });
 
-    setTimeout(openEnvelope,500);
+    setTimeout(()=>{
+
+        openEnvelope();
+
+    },500);
 
 }
+
 
 //==================================================
 // OPEN ENVELOPE
@@ -214,7 +248,7 @@ function breakSeal(){
 
 function openEnvelope(){
 
-    // Open flap
+    // Open the flap
 
     flap.animate([
 
@@ -240,7 +274,7 @@ function openEnvelope(){
 
     });
 
-    // Pull invitation card
+    // Pull the invitation out
 
     setTimeout(()=>{
 
@@ -254,15 +288,15 @@ function openEnvelope(){
 
             {
 
-                transform:"translateY(-185px)"
+                transform:"translateY(-190px)"
 
             }
 
         ],{
 
-            duration:1800,
+            duration:1700,
 
-            easing:"cubic-bezier(.18,.85,.25,1)",
+            easing:"cubic-bezier(.2,.9,.25,1)",
 
             fill:"forwards"
 
@@ -270,7 +304,7 @@ function openEnvelope(){
 
     },450);
 
-    // Glow envelope
+    // Envelope glow
 
     envelope.animate([
 
@@ -282,7 +316,7 @@ function openEnvelope(){
 
         {
 
-            filter:"drop-shadow(0 30px 70px rgba(212,175,55,.35))"
+            filter:"drop-shadow(0 35px 80px rgba(212,175,55,.30))"
 
         }
 
@@ -294,12 +328,11 @@ function openEnvelope(){
 
     });
 
-    // Continue
+    // Continue animation
 
     setTimeout(showInvitation,2600);
 
 }
-
 
 
 //==================================================
@@ -322,7 +355,7 @@ function showInvitation(){
 
             opacity:0,
 
-            transform:"scale(.96)"
+            transform:"scale(.97)"
 
         }
 
@@ -330,9 +363,9 @@ function showInvitation(){
 
         duration:900,
 
-        fill:"forwards",
+        easing:"ease-in-out",
 
-        easing:"ease-in"
+        fill:"forwards"
 
     });
 
@@ -348,7 +381,7 @@ function showInvitation(){
 
                 opacity:0,
 
-                transform:"translateY(120px)"
+                transform:"translateY(80px)"
 
             },
 
@@ -356,13 +389,13 @@ function showInvitation(){
 
                 opacity:1,
 
-                transform:"translateY(0px)"
+                transform:"translateY(0)"
 
             }
 
         ],{
 
-            duration:1600,
+            duration:1500,
 
             easing:"ease-out",
 
@@ -383,9 +416,8 @@ function showInvitation(){
 }
 
 
-
 //==================================================
-// CARD ENTRANCE
+// SCROLL REVEAL
 //==================================================
 
 const observer = new IntersectionObserver(entries=>{
@@ -400,7 +432,7 @@ const observer = new IntersectionObserver(entries=>{
 
                     opacity:0,
 
-                    transform:"translateY(35px)"
+                    transform:"translateY(30px)"
 
                 },
 
@@ -414,7 +446,7 @@ const observer = new IntersectionObserver(entries=>{
 
             ],{
 
-                duration:800,
+                duration:700,
 
                 easing:"ease-out",
 
@@ -426,12 +458,11 @@ const observer = new IntersectionObserver(entries=>{
 
     });
 
-},{threshold:.15});
-
+},{threshold:0.15});
 
 
 //==================================================
-// OBSERVE ELEMENTS
+// REGISTER ELEMENTS
 //==================================================
 
 window.addEventListener("load",()=>{
@@ -449,12 +480,11 @@ window.addEventListener("load",()=>{
 });
 
 
-
 //==================================================
 // HEART ANIMATION
 //==================================================
 
-const heart = document.querySelector(".card h1 span");
+const heart=document.querySelector(".card h1 span");
 
 if(heart){
 
@@ -488,63 +518,75 @@ if(heart){
 
 
 //==================================================
-// BUTTON EFFECT
+// BUTTON HOVER (Desktop Only)
 //==================================================
 
-document.querySelectorAll(".btn").forEach(btn=>{
+if(window.matchMedia("(hover:hover)").matches){
 
-    btn.addEventListener("mouseenter",()=>{
+    document.querySelectorAll(".btn").forEach(btn=>{
 
-        btn.animate([
+        btn.addEventListener("mouseenter",()=>{
 
-            {
-                transform:"translateY(0px) scale(1)"
-            },
+            btn.animate([
 
-            {
-                transform:"translateY(-6px) scale(1.04)"
-            }
+                {
 
-        ],{
+                    transform:"translateY(0px) scale(1)"
 
-            duration:220,
+                },
 
-            fill:"forwards"
+                {
+
+                    transform:"translateY(-6px) scale(1.04)"
+
+                }
+
+            ],{
+
+                duration:220,
+
+                fill:"forwards"
+
+            });
+
+        });
+
+        btn.addEventListener("mouseleave",()=>{
+
+            btn.animate([
+
+                {
+
+                    transform:"translateY(-6px) scale(1.04)"
+
+                },
+
+                {
+
+                    transform:"translateY(0px) scale(1)"
+
+                }
+
+            ],{
+
+                duration:220,
+
+                fill:"forwards"
+
+            });
 
         });
 
     });
 
-    btn.addEventListener("mouseleave",()=>{
-
-        btn.animate([
-
-            {
-                transform:"translateY(-6px) scale(1.04)"
-            },
-
-            {
-                transform:"translateY(0px) scale(1)"
-            }
-
-        ],{
-
-            duration:220,
-
-            fill:"forwards"
-
-        });
-
-    });
-
-});
+}
 
 
 //==================================================
-// CARD SHADOW
+// CARD GLOW
 //==================================================
 
-const card = document.querySelector(".card");
+const card=document.querySelector(".card");
 
 if(card){
 
@@ -564,7 +606,7 @@ if(card){
 
                 boxShadow:
 
-                "0 45px 110px rgba(212,175,55,.18)"
+                "0 45px 110px rgba(212,175,55,.20)"
 
             },
 
@@ -578,71 +620,23 @@ if(card){
 
         ],{
 
-            duration:5000
+            duration:4500
 
         });
 
-    },5200);
+    },5000);
 
 }
 
 
 //==================================================
-// HERO PARALLAX
-//==================================================
-
-document.addEventListener("mousemove",(e)=>{
-
-    if(opened) return;
-
-    const x=(window.innerWidth/2-e.clientX)/80;
-
-    const y=(window.innerHeight/2-e.clientY)/80;
-
-    envelope.style.transform=
-
-    `rotateY(${x}deg)
-     rotateX(${-y}deg)`;
-
-});
-
-document.addEventListener("mouseleave",()=>{
-
-    if(opened) return;
-
-    envelope.style.transform=
-
-    "rotateX(0deg) rotateY(0deg)";
-
-});
-
-
-//==================================================
-// DISABLE RIGHT CLICK ON DECORATIONS
-//==================================================
-
-document.querySelectorAll(
-
-".envFlowerLeft,.envFlowerRight,.flowerTop,.flowerBottom"
-
-).forEach(img=>{
-
-    img.addEventListener("contextmenu",(e)=>{
-
-        e.preventDefault();
-
-    });
-
-});
-
-
-//==================================================
-// PRELOAD IMAGES
+// IMAGE PRELOAD
 //==================================================
 
 [
 "assets/images/paper.png",
 "assets/images/stamp.png",
+"assets/images/corner.png",
 "assets/images/leaf1.png",
 "assets/images/leaf2.png",
 "assets/images/leaf3.png",
@@ -650,8 +644,7 @@ document.querySelectorAll(
 "assets/images/peony1.png",
 "assets/images/peony2.png",
 "assets/images/peony3.png",
-"assets/images/peony4.png",
-"assets/images/corner.png"
+"assets/images/peony4.png"
 
 ].forEach(src=>{
 
@@ -663,21 +656,7 @@ document.querySelectorAll(
 
 
 //==================================================
-// END
-//==================================================
-
-console.log(
-
-"%cLuxury Wedding Invitation Ready 🌸",
-
-"color:#b88b2b;font-size:16px;font-weight:bold;"
-
-);
-
-
-
-//==================================================
-// GOLD SPARKLES
+// GOLD PARTICLES
 //==================================================
 
 const particleContainer=document.querySelector(".gold-particles");
@@ -696,11 +675,15 @@ function createParticle(){
 
     particleContainer.appendChild(p);
 
-    setTimeout(()=>p.remove(),12000);
+    setTimeout(()=>{
+
+        p.remove();
+
+    },6000);
 
 }
 
-setInterval(createParticle,200);
+setInterval(createParticle,120);
 
 
 //==================================================
@@ -709,11 +692,13 @@ setInterval(createParticle,200);
 
 const flowerContainer=document.querySelector(".floating-flowers");
 
-const flowers=[
+const flowerImages=[
 
 "assets/images/peony1.png",
 "assets/images/peony2.png",
 "assets/images/leaf1.png",
+"assets/images/leaf2.png",
+"assets/images/leaf3.png",
 "assets/images/leaf4.png"
 
 ];
@@ -722,22 +707,71 @@ function createFlower(){
 
     const img=document.createElement("img");
 
-    img.src=flowers[Math.floor(Math.random()*flowers.length)];
-
     img.className="floatingFlower";
+
+    img.src=flowerImages[
+
+        Math.floor(
+
+            Math.random()*flowerImages.length
+
+        )
+
+    ];
 
     img.style.left=Math.random()*100+"vw";
 
-    img.style.width=(40+Math.random()*35)+"px";
+    img.style.width=(55+Math.random()*35)+"px";
 
-    img.style.animationDuration=(5+Math.random()*3)+"s";
+    img.style.opacity=.12+Math.random()*.15;
 
-    img.style.transform=`rotate(${Math.random()*360}deg)`;
+    img.style.animationDuration=(5+Math.random()*2)+"s";
+
+    img.style.transform=
+
+        `rotate(${Math.random()*360}deg)`;
 
     flowerContainer.appendChild(img);
 
-    setTimeout(()=>img.remove(),30000);
+    setTimeout(()=>{
+
+        img.remove();
+
+    },8000);
 
 }
 
-setInterval(createFlower,1500);
+setInterval(createFlower,500);
+
+
+//==================================================
+// REMOVE RIGHT CLICK
+//==================================================
+
+document.querySelectorAll(
+
+".envFlowerLeft,.envFlowerRight,.flowerTop,.flowerBottom"
+
+).forEach(img=>{
+
+    img.addEventListener("contextmenu",e=>{
+
+        e.preventDefault();
+
+    });
+
+});
+
+
+//==================================================
+// READY
+//==================================================
+
+console.log(
+
+"%cWedding Invitation Loaded 🌸",
+
+"color:#b88b2b;font-size:15px;font-weight:bold;"
+
+);
+
