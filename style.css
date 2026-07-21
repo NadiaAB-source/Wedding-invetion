@@ -1233,36 +1233,36 @@ rotate(720deg);
 
 .host .label{
 
-    font-size:13px;
+    font-size:10px;
 
 }
 
 .host .name{
 
-    font-size:15px;
+    font-size:12px;
 
 }
 
 .hosts .and{
 
-    font-size:11px;
+    font-size:9px;
 
 }
 
 .inviteText{
 
-    font-size:11px;
+    font-size:9px;
 
 }
 .heroVerse{
 
-    max-width:90%;
+    max-width:95%;
 
-    font-size:clamp(11px,4vw,21px);
+    font-size:clamp(11px,4vw,16px);
 
     line-height:1.8;
 
-    margin-bottom:30px;
+    margin-bottom:25px;
 
 }
 
