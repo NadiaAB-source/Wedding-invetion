@@ -151,7 +151,6 @@ body{
 
 #hero{
 
-
     min-height:100svh;
 
     display:flex;
@@ -162,9 +161,13 @@ body{
 
     align-items:center;
 
-    position:relative;
+    text-align:center;
 
-    padding:50px 20px;
+    width:100%;
+
+    padding:40px 20px;
+
+    margin:0 auto;
 
 }
 
@@ -199,7 +202,9 @@ body{
 
     aspect-ratio:520/360;
 
-    height:auto;
+    margin:0 auto;
+
+    display:block;
 
     perspective:1800px;
 
@@ -519,9 +524,11 @@ opacity:.45;
 
     align-items:center;
 
-    padding:120px 20px;
+    min-height:100svh;
 
-    position:relative;
+    width:100%;
+
+    padding:60px 20px;
 
 }
 
@@ -1377,13 +1384,29 @@ rotate(720deg);
 
 .card{
 
-    width:95vw;
+    position:relative;
 
-    max-width:95vw;
+    width:min(94vw,900px);
 
-    padding:35px 22px;
+    margin:0 auto;
 
-    border-radius:18px;
+    padding:clamp(35px,6vw,90px);
+
+    background:
+
+    url("assets/images/paper.png")
+
+    center/cover,
+
+    #fffefb;
+
+    border-radius:20px;
+
+    border:2px solid rgba(200,170,80,.35);
+
+    box-shadow:0 35px 80px rgba(0,0,0,.12);
+
+    overflow:hidden;
 
 }
 
@@ -1879,3 +1902,16 @@ overscroll-behavior:none;
     line-height:1.8;
 
 }
+setTimeout(()=>{
+
+    invitation.scrollIntoView({
+
+        behavior:"smooth",
+
+        block:"center"
+
+    });
+
+},300);
+
+});
