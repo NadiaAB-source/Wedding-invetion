@@ -410,6 +410,17 @@ function showInvitation(){
         hero.style.display="none";
 
         invitation.style.display="flex";
+        setTimeout(()=>{
+
+    invitation.scrollIntoView({
+
+        behavior:"smooth",
+
+        block:"center"
+
+    });
+
+},300);
 
         invitation.animate([
 
