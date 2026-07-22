@@ -19,21 +19,6 @@ const music = document.getElementById("music");
 const openSound = document.getElementById("openSound");
 
 const musicBtn = document.getElementById("musicBtn");
-//==================================================
-// RECORDER
-//==================================================
-
-const recordBtn = document.getElementById("recordBtn");
-
-let recorder = null;
-
-let recordedChunks = [];
-
-let recordingStream = null;
-
-let opened = false;
-
-let playing = false;
 
 
 //==================================================
@@ -79,119 +64,7 @@ function stopMusic(){
     musicBtn.classList.remove("playing");
 
 }
-//==================================================
-// START RECORDING
-//==================================================
 
-async function startRecording(){
-
-    try{
-
-        recordingStream = await navigator.mediaDevices.getDisplayMedia({
-
-            video:{
-                frameRate:60
-            },
-
-            audio:true,
-
-            preferCurrentTab:true
-
-        });
-
-        recorder = new MediaRecorder(recordingStream,{
-
-            mimeType:"video/webm;codecs=vp9"
-
-        });
-
-        recordedChunks = [];
-
-        recorder.ondataavailable = e=>{
-
-            if(e.data.size>0){
-
-                recordedChunks.push(e.data);
-
-            }
-
-        };
-
-        recorder.onstop = downloadRecording;
-
-        recorder.start();
-
-        recordBtn.classList.add("recording");
-
-        recordBtn.innerHTML="⏺ Recording...";
-
-        restartInvitation();
-
-    }
-
-    catch(err){
-
-        alert("Recording cancelled.");
-
-    }
-
-}
-//==================================================
-// STOP RECORDING
-//==================================================
-
-function stopRecording(){
-
-    if(!recorder) return;
-
-    recorder.stop();
-
-    recordingStream.getTracks().forEach(track=>track.stop());
-
-    recordBtn.classList.remove("recording");
-
-    recordBtn.innerHTML="م ن";
-
-}
-musicBtn.addEventListener("click",()=>{
-
-    if(playing){
-
-        stopMusic();
-
-    }else{
-
-        startMusic();
-
-    }
-
-});
-
-//==================================================
-// DOWNLOAD VIDEO
-//==================================================
-
-function downloadRecording(){
-
-    const blob = new Blob(recordedChunks,{
-
-        type:"video/webm;codecs=vp9"
-
-    });
-
-    const url = URL.createObjectURL(blob);
-
-    const a=document.createElement("a");
-
-    a.href=url;
-
-    a.download = "ن م.webm";
-
-    a.click();
-
-    URL.revokeObjectURL(url);
-
-}
 //==================================================
 // BUTTON
 //==================================================
