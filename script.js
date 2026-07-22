@@ -161,7 +161,7 @@ window.addEventListener("load",()=>{
 
         openInvitation();
 
-    },800);
+    },600);
 
 });
 
@@ -258,7 +258,7 @@ function breakSeal(){
 
         ],{
 
-            duration:500,
+            duration:350,
 
             easing:"ease-in-out",
 
@@ -274,7 +274,7 @@ function breakSeal(){
 
         openEnvelope();
 
-    },900);
+    },650);
 
 }
 
@@ -302,7 +302,7 @@ function openEnvelope(){
 
     ],{
 
-        duration:1000,
+        duration:700,
 
         easing:"ease-in-out",
 
@@ -330,7 +330,7 @@ function openEnvelope(){
 
         ],{
 
-            duration:1700,
+            duration:700,
 
             easing:"cubic-bezier(.2,.9,.25,1)",
 
@@ -338,7 +338,7 @@ function openEnvelope(){
 
         });
 
-    },450);
+    },180);
 
     // Envelope glow
 
@@ -358,7 +358,7 @@ function openEnvelope(){
 
     ],{
 
-        duration:1400,
+        duration:900,
 
         fill:"forwards"
 
@@ -366,7 +366,7 @@ function openEnvelope(){
 
     // Continue animation
 
-    setTimeout(showInvitation,2600);
+    setTimeout(showInvitation,1700);
 
 }
 
@@ -397,7 +397,7 @@ function showInvitation(){
 
     ],{
 
-        duration:900,
+        duration:700,
 
         easing:"ease-in-out",
 
@@ -420,7 +420,7 @@ function showInvitation(){
 
     });
 
-},300);
+},350);
 
         invitation.animate([
 
@@ -442,7 +442,7 @@ function showInvitation(){
 
         ],{
 
-            duration:1500,
+            duration:1000,
 
             easing:"ease-out",
 
@@ -450,15 +450,9 @@ function showInvitation(){
 
         });
 
-        window.scrollTo({
 
-            top:0,
 
-            behavior:"smooth"
-
-        });
-
-    },900);
+    },700);
 
 }
 
@@ -553,7 +547,7 @@ if(heart){
 
         ],{
 
-            duration:900,
+            duration:700,
 
             easing:"ease-in-out"
 
