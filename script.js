@@ -19,6 +19,17 @@ const music = document.getElementById("music");
 const openSound = document.getElementById("openSound");
 
 const musicBtn = document.getElementById("musicBtn");
+//==================================================
+// RECORDER
+//==================================================
+
+const recordBtn = document.getElementById("recordBtn");
+
+let recorder = null;
+
+let recordedChunks = [];
+
+let recordingStream = null;
 
 let opened = false;
 
@@ -49,7 +60,7 @@ function startMusic(){
 
     }).catch(()=>{
 
-        playing=false;
+        playing=true;
 
     });
 
@@ -68,7 +79,80 @@ function stopMusic(){
     musicBtn.classList.remove("playing");
 
 }
+//==================================================
+// START RECORDING
+//==================================================
 
+async function startRecording(){
+
+    try{
+
+        recordingStream = await navigator.mediaDevices.getDisplayMedia({
+
+            video:{
+                frameRate:60
+            },
+
+            audio:true,
+
+            preferCurrentTab:true
+
+        });
+
+        recorder = new MediaRecorder(recordingStream,{
+
+            mimeType:"video/webm;codecs=vp9"
+
+        });
+
+        recordedChunks = [];
+
+        recorder.ondataavailable = e=>{
+
+            if(e.data.size>0){
+
+                recordedChunks.push(e.data);
+
+            }
+
+        };
+
+        recorder.onstop = downloadRecording;
+
+        recorder.start();
+
+        recordBtn.classList.add("recording");
+
+        recordBtn.innerHTML="⏺ Recording...";
+
+        restartInvitation();
+
+    }
+
+    catch(err){
+
+        alert("Recording cancelled.");
+
+    }
+
+}
+//==================================================
+// STOP RECORDING
+//==================================================
+
+function stopRecording(){
+
+    if(!recorder) return;
+
+    recorder.stop();
+
+    recordingStream.getTracks().forEach(track=>track.stop());
+
+    recordBtn.classList.remove("recording");
+
+    recordBtn.innerHTML="م ن";
+
+}
 musicBtn.addEventListener("click",()=>{
 
     if(playing){
@@ -83,7 +167,40 @@ musicBtn.addEventListener("click",()=>{
 
 });
 
+//==================================================
+// DOWNLOAD VIDEO
+//==================================================
 
+function downloadRecording(){
+
+    const blob = new Blob(recordedChunks,{
+
+        type:"video/webm;codecs=vp9"
+
+    });
+
+    const url = URL.createObjectURL(blob);
+
+    const a=document.createElement("a");
+
+    a.href=url;
+
+    a.download="WeddingInvitation.webm";
+
+    a.click();
+
+    URL.revokeObjectURL(url);
+
+}
+//==================================================
+// BUTTON
+//==================================================
+
+recordBtn.addEventListener("click",()=>{
+
+    startRecording();
+
+});
 //==================================================
 // ENVELOPE HOVER
 //==================================================
@@ -801,6 +918,48 @@ document.querySelectorAll(
 
 });
 
+//==================================================
+// RESTART INVITATION
+//==================================================
+
+function restartInvitation(){
+
+    opened = false;
+
+    hero.style.display = "flex";
+
+    hero.style.opacity = "1";
+
+    hero.style.transform = "scale(1)";
+
+    invitation.style.display = "none";
+
+    envelope.style.pointerEvents = "auto";
+
+    flap.style.transform = "rotateX(0deg)";
+
+    letter.style.transform = "translateY(130px)";
+
+    seal.style.opacity = "1";
+
+    seal.style.transform = "translateX(-50%) scale(1)";
+
+    stopMusic();
+
+    setTimeout(()=>{
+
+        openInvitation();
+
+    },400);
+
+    // Stop recording automatically
+    setTimeout(()=>{
+
+        stopRecording();
+
+    },7000);
+
+}
 
 //==================================================
 // READY
