@@ -419,17 +419,7 @@ function showInvitation(){
 
         });
 
-        setTimeout(()=>{
-
-            invitation.scrollIntoView({
-
-                behavior:"smooth",
-
-                block:"center"
-
-            });
-
-        },250);
+      
 
     },700);
 
