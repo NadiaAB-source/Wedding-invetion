@@ -349,7 +349,7 @@ function openEnvelope(){
 
     // Continue animation
 
-    setTimeout(showInvitation,11200);
+    setTimeout(showInvitation,1200);
 
 }
 
