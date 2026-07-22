@@ -19,7 +19,8 @@ const music = document.getElementById("music");
 const openSound = document.getElementById("openSound");
 
 const musicBtn = document.getElementById("musicBtn");
-
+let opened = false;
+let playing = false;
 
 //==================================================
 // MUSIC
@@ -65,15 +66,7 @@ function stopMusic(){
 
 }
 
-//==================================================
-// BUTTON
-//==================================================
 
-recordBtn.addEventListener("click",()=>{
-
-    startRecording();
-
-});
 //==================================================
 // ENVELOPE HOVER
 //==================================================
@@ -791,48 +784,6 @@ document.querySelectorAll(
 
 });
 
-//==================================================
-// RESTART INVITATION
-//==================================================
-
-function restartInvitation(){
-
-    opened = false;
-
-    hero.style.display = "flex";
-
-    hero.style.opacity = "1";
-
-    hero.style.transform = "scale(1)";
-
-    invitation.style.display = "none";
-
-    envelope.style.pointerEvents = "auto";
-
-    flap.style.transform = "rotateX(0deg)";
-
-    letter.style.transform = "translateY(130px)";
-
-    seal.style.opacity = "1";
-
-    seal.style.transform = "translateX(-50%) scale(1)";
-
-    stopMusic();
-
-    setTimeout(()=>{
-
-        openInvitation();
-
-    },400);
-
-    // Stop recording automatically
-    setTimeout(()=>{
-
-        stopRecording();
-
-    },12000);
-
-}
 
 //==================================================
 // READY
