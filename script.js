@@ -3,24 +3,20 @@
 //==================================================
 
 const hero = document.getElementById("hero");
-
 const invitation = document.getElementById("invitation");
 
 const envelope = document.querySelector(".envelope");
-
 const flap = document.querySelector(".flap");
-
 const seal = document.querySelector(".seal");
-
 const letter = document.querySelector(".letter");
 
 const music = document.getElementById("music");
-
 const openSound = document.getElementById("openSound");
-
 const musicBtn = document.getElementById("musicBtn");
+
 let opened = false;
 let playing = false;
+
 
 //==================================================
 // MUSIC
@@ -36,17 +32,17 @@ function startMusic(){
 
     if(playing || !music) return;
 
-    playing = true;
-
     music.play().then(()=>{
 
-        musicBtn.innerHTML="🔊";
+        playing = true;
+
+        musicBtn.innerHTML = "🔊";
 
         musicBtn.classList.add("playing");
 
     }).catch(()=>{
 
-        playing=true;
+        playing = false;
 
     });
 
@@ -56,15 +52,31 @@ function stopMusic(){
 
     if(!music) return;
 
-    playing=false;
+    playing = false;
 
     music.pause();
 
-    musicBtn.innerHTML="🎵";
+    music.currentTime = 0;
+
+    musicBtn.innerHTML = "🎵";
 
     musicBtn.classList.remove("playing");
 
 }
+
+musicBtn.addEventListener("click",()=>{
+
+    if(playing){
+
+        stopMusic();
+
+    }else{
+
+        startMusic();
+
+    }
+
+});
 
 
 //==================================================
@@ -79,21 +91,13 @@ if(window.matchMedia("(hover:hover)").matches){
 
         envelope.animate([
 
-            {
+            { transform:"translateY(0)" },
 
-                transform:"translateY(0px)"
-
-            },
-
-            {
-
-                transform:"translateY(-10px)"
-
-            }
+            { transform:"translateY(-10px)" }
 
         ],{
 
-            duration:400,
+            duration:300,
 
             easing:"ease-out",
 
@@ -109,21 +113,13 @@ if(window.matchMedia("(hover:hover)").matches){
 
         envelope.animate([
 
-            {
+            { transform:"translateY(-10px)" },
 
-                transform:"translateY(-10px)"
-
-            },
-
-            {
-
-                transform:"translateY(0px)"
-
-            }
+            { transform:"translateY(0)" }
 
         ],{
 
-            duration:400,
+            duration:300,
 
             fill:"forwards"
 
@@ -148,6 +144,7 @@ window.addEventListener("load",()=>{
 
 });
 
+
 //==================================================
 // START SEQUENCE
 //==================================================
@@ -160,7 +157,6 @@ function openInvitation(){
 
     envelope.style.pointerEvents = "none";
 
-    // Music (may be blocked on iPhone)
     startMusic();
 
     if(openSound){
@@ -175,13 +171,14 @@ function openInvitation(){
 
 }
 
+
 //==================================================
 // BREAK SEAL
 //==================================================
 
 function breakSeal(){
 
-    // Glow before breaking
+    // Glow
 
     seal.animate([
 
@@ -203,13 +200,13 @@ function breakSeal(){
 
     ],{
 
-        duration:400,
+        duration:300,
 
         fill:"forwards"
 
     });
 
-    // Break animation
+    // Break
 
     setTimeout(()=>{
 
@@ -233,7 +230,7 @@ function breakSeal(){
 
             {
 
-                transform:"translateX(-50%) scale(.15) rotate(280deg)",
+                transform:"translateX(-50%) scale(.15) rotate(180deg)",
 
                 opacity:0
 
@@ -241,7 +238,7 @@ function breakSeal(){
 
         ],{
 
-            duration:450,
+            duration:350,
 
             easing:"ease-in-out",
 
@@ -249,17 +246,18 @@ function breakSeal(){
 
         });
 
-    },400);
+    },300);
 
-    // Open envelope after seal breaks
+    // Open envelope
 
     setTimeout(()=>{
 
         openEnvelope();
 
-    },800);
+    },650);
 
 }
+
 
 //==================================================
 // OPEN ENVELOPE
@@ -267,7 +265,7 @@ function breakSeal(){
 
 function openEnvelope(){
 
-    // Open the flap
+    // Flap
 
     flap.animate([
 
@@ -279,13 +277,13 @@ function openEnvelope(){
 
         {
 
-            transform:"rotateX(280deg)"
+            transform:"rotateX(180deg)"
 
         }
 
     ],{
 
-        duration:1200,
+        duration:700,
 
         easing:"ease-in-out",
 
@@ -293,7 +291,7 @@ function openEnvelope(){
 
     });
 
-    // Pull the invitation out
+    // Letter
 
     setTimeout(()=>{
 
@@ -313,7 +311,7 @@ function openEnvelope(){
 
         ],{
 
-            duration:1200,
+            duration:700,
 
             easing:"cubic-bezier(.2,.9,.25,1)",
 
@@ -321,9 +319,9 @@ function openEnvelope(){
 
         });
 
-    },280);
+    },180);
 
-    // Envelope glow
+    // Glow
 
     envelope.animate([
 
@@ -341,18 +339,17 @@ function openEnvelope(){
 
     ],{
 
-        duration:1200,
+        duration:900,
 
         fill:"forwards"
 
     });
 
-    // Continue animation
+    // Continue
 
-    setTimeout(showInvitation,1200);
+    setTimeout(showInvitation,1700);
 
 }
-
 
 //==================================================
 // SHOW INVITATION
@@ -380,7 +377,7 @@ function showInvitation(){
 
     ],{
 
-        duration:1200,
+        duration:700,
 
         easing:"ease-in-out",
 
@@ -390,20 +387,9 @@ function showInvitation(){
 
     setTimeout(()=>{
 
-        hero.style.display="none";
+        hero.style.display = "none";
 
-        invitation.style.display="flex";
-        setTimeout(()=>{
-
-    invitation.scrollIntoView({
-
-        behavior:"smooth",
-
-        block:"center"
-
-    });
-
-},450);
+        invitation.style.display = "flex";
 
         invitation.animate([
 
@@ -425,7 +411,7 @@ function showInvitation(){
 
         ],{
 
-            duration:1300,
+            duration:1000,
 
             easing:"ease-out",
 
@@ -433,367 +419,18 @@ function showInvitation(){
 
         });
 
+        setTimeout(()=>{
 
+            invitation.scrollIntoView({
 
-    },1200);
+                behavior:"smooth",
 
-}
-
-
-//==================================================
-// SCROLL REVEAL
-//==================================================
-
-const observer = new IntersectionObserver(entries=>{
-
-    entries.forEach(entry=>{
-
-        if(entry.isIntersecting){
-
-            entry.target.animate([
-
-                {
-
-                    opacity:0,
-
-                    transform:"translateY(30px)"
-
-                },
-
-                {
-
-                    opacity:1,
-
-                    transform:"translateY(0)"
-
-                }
-
-            ],{
-
-                duration:1200,
-
-                easing:"ease-out",
-
-                fill:"forwards"
+                block:"center"
 
             });
 
-        }
+        },250);
 
-    });
-
-},{threshold:0.15});
-
-
-//==================================================
-// REGISTER ELEMENTS
-//==================================================
-
-window.addEventListener("load",()=>{
-
-    document.querySelectorAll(
-
-        ".card h1,.card h2,.card h3,.card h4,.card p,.divider,.info,.notes,.dua,.buttons"
-
-    ).forEach(el=>{
-
-        observer.observe(el);
-
-    });
-
-});
-
-
-//==================================================
-// HEART ANIMATION
-//==================================================
-
-const heart=document.querySelector(".card h1 span");
-
-if(heart){
-
-    setInterval(()=>{
-
-        heart.animate([
-
-            {
-                transform:"scale(1)"
-            },
-
-            {
-                transform:"scale(1.25)"
-            },
-
-            {
-                transform:"scale(1)"
-            }
-
-        ],{
-
-            duration:1200,
-
-            easing:"ease-in-out"
-
-        });
-
-    },2200);
+    },700);
 
 }
-
-
-//==================================================
-// BUTTON HOVER (Desktop Only)
-//==================================================
-
-if(window.matchMedia("(hover:hover)").matches){
-
-    document.querySelectorAll(".btn").forEach(btn=>{
-
-        btn.addEventListener("mouseenter",()=>{
-
-            btn.animate([
-
-                {
-
-                    transform:"translateY(0px) scale(1)"
-
-                },
-
-                {
-
-                    transform:"translateY(-6px) scale(1.04)"
-
-                }
-
-            ],{
-
-                duration:220,
-
-                fill:"forwards"
-
-            });
-
-        });
-
-        btn.addEventListener("mouseleave",()=>{
-
-            btn.animate([
-
-                {
-
-                    transform:"translateY(-6px) scale(1.04)"
-
-                },
-
-                {
-
-                    transform:"translateY(0px) scale(1)"
-
-                }
-
-            ],{
-
-                duration:220,
-
-                fill:"forwards"
-
-            });
-
-        });
-
-    });
-
-}
-
-
-//==================================================
-// CARD GLOW
-//==================================================
-
-const card=document.querySelector(".card");
-
-if(card){
-
-    setInterval(()=>{
-
-        card.animate([
-
-            {
-
-                boxShadow:
-
-                "0 35px 80px rgba(0,0,0,.12)"
-
-            },
-
-            {
-
-                boxShadow:
-
-                "0 45px 110px rgba(212,175,55,.20)"
-
-            },
-
-            {
-
-                boxShadow:
-
-                "0 35px 80px rgba(0,0,0,.12)"
-
-            }
-
-        ],{
-
-            duration:4500
-
-        });
-
-    },5000);
-
-}
-
-
-//==================================================
-// IMAGE PRELOAD
-//==================================================
-
-[
-"assets/images/paper.png",
-"assets/images/stamp.png",
-"assets/images/corner.png",
-"assets/images/leaf1.png",
-"assets/images/leaf2.png",
-"assets/images/leaf3.png",
-"assets/images/leaf4.png",
-
-"assets/images/peony3.png",
-"assets/images/peony4.png"
-
-].forEach(src=>{
-
-    const img=new Image();
-
-    img.src=src;
-
-});
-
-
-//==================================================
-// GOLD PARTICLES
-//==================================================
-
-const particleContainer=document.querySelector(".gold-particles");
-
-function createParticle(){
-
-    const p=document.createElement("div");
-
-    p.className="particle";
-
-    p.style.left=Math.random()*100+"vw";
-
-    p.style.animationDuration=(3+Math.random()*2)+"s";
-
-    p.style.opacity=.3+Math.random()*.6;
-
-    particleContainer.appendChild(p);
-
-    setTimeout(()=>{
-
-        p.remove();
-
-    },6000);
-
-}
-
-setInterval(createParticle,120);
-
-
-//==================================================
-// FLOATING FLOWERS
-//==================================================
-
-const flowerContainer=document.querySelector(".floating-flowers");
-
-const flowerImages=[
-
-
-"assets/images/leaf1.png",
-"assets/images/leaf2.png",
-"assets/images/leaf3.png",
-"assets/images/leaf4.png"
-
-];
-
-function createFlower(){
-
-    const img=document.createElement("img");
-
-    img.className="floatingFlower";
-
-    img.src=flowerImages[
-
-        Math.floor(
-
-            Math.random()*flowerImages.length
-
-        )
-
-    ];
-
-    img.style.left=Math.random()*100+"vw";
-
-    img.style.width=(55+Math.random()*35)+"px";
-
-    img.style.opacity=.12+Math.random()*.15;
-
-    img.style.animationDuration=(5+Math.random()*2)+"s";
-
-    img.style.transform=
-
-        `rotate(${Math.random()*360}deg)`;
-
-    flowerContainer.appendChild(img);
-
-    setTimeout(()=>{
-
-        img.remove();
-
-    },8000);
-
-}
-
-setInterval(createFlower,500);
-
-
-//==================================================
-// REMOVE RIGHT CLICK
-//==================================================
-
-document.querySelectorAll(
-
-".envFlowerLeft,.envFlowerRight,.flowerTop,.flowerBottom"
-
-).forEach(img=>{
-
-    img.addEventListener("contextmenu",e=>{
-
-        e.preventDefault();
-
-    });
-
-});
-
-
-//==================================================
-// READY
-//==================================================
-
-console.log(
-
-"%cWedding Invitation Loaded 🌸",
-
-"color:#b88b2b;font-size:15px;font-weight:bold;"
-
-);
-
