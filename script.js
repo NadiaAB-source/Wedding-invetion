@@ -227,7 +227,7 @@ if(window.matchMedia("(hover:hover)").matches){
 
         ],{
 
-            duration:300,
+            duration:400,
 
             easing:"ease-out",
 
@@ -257,7 +257,7 @@ if(window.matchMedia("(hover:hover)").matches){
 
         ],{
 
-            duration:300,
+            duration:400,
 
             fill:"forwards"
 
@@ -337,7 +337,7 @@ function breakSeal(){
 
     ],{
 
-        duration:300,
+        duration:400,
 
         fill:"forwards"
 
@@ -367,7 +367,7 @@ function breakSeal(){
 
             {
 
-                transform:"translateX(-50%) scale(.15) rotate(180deg)",
+                transform:"translateX(-50%) scale(.15) rotate(280deg)",
 
                 opacity:0
 
@@ -375,7 +375,7 @@ function breakSeal(){
 
         ],{
 
-            duration:350,
+            duration:450,
 
             easing:"ease-in-out",
 
@@ -383,7 +383,7 @@ function breakSeal(){
 
         });
 
-    },300);
+    },400);
 
     // Open envelope after seal breaks
 
@@ -391,7 +391,7 @@ function breakSeal(){
 
         openEnvelope();
 
-    },650);
+    },800);
 
 }
 
@@ -413,13 +413,13 @@ function openEnvelope(){
 
         {
 
-            transform:"rotateX(180deg)"
+            transform:"rotateX(280deg)"
 
         }
 
     ],{
 
-        duration:700,
+        duration:1200,
 
         easing:"ease-in-out",
 
@@ -447,7 +447,7 @@ function openEnvelope(){
 
         ],{
 
-            duration:700,
+            duration:1200,
 
             easing:"cubic-bezier(.2,.9,.25,1)",
 
@@ -455,7 +455,7 @@ function openEnvelope(){
 
         });
 
-    },180);
+    },280);
 
     // Envelope glow
 
@@ -475,7 +475,7 @@ function openEnvelope(){
 
     ],{
 
-        duration:900,
+        duration:1200,
 
         fill:"forwards"
 
@@ -483,7 +483,7 @@ function openEnvelope(){
 
     // Continue animation
 
-    setTimeout(showInvitation,1700);
+    setTimeout(showInvitation,11200);
 
 }
 
@@ -514,7 +514,7 @@ function showInvitation(){
 
     ],{
 
-        duration:700,
+        duration:1200,
 
         easing:"ease-in-out",
 
@@ -537,7 +537,7 @@ function showInvitation(){
 
     });
 
-},350);
+},450);
 
         invitation.animate([
 
@@ -559,7 +559,7 @@ function showInvitation(){
 
         ],{
 
-            duration:1000,
+            duration:1300,
 
             easing:"ease-out",
 
@@ -569,7 +569,7 @@ function showInvitation(){
 
 
 
-    },700);
+    },1200);
 
 }
 
@@ -604,7 +604,7 @@ const observer = new IntersectionObserver(entries=>{
 
             ],{
 
-                duration:700,
+                duration:1200,
 
                 easing:"ease-out",
 
@@ -664,7 +664,7 @@ if(heart){
 
         ],{
 
-            duration:700,
+            duration:1200,
 
             easing:"ease-in-out"
 
@@ -957,7 +957,7 @@ function restartInvitation(){
 
         stopRecording();
 
-    },7000);
+    },12000);
 
 }
 
