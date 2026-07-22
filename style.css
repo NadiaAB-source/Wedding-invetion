@@ -1417,7 +1417,17 @@ rotate(720deg);
 }
 
 
+#recordBtn{
 
+    right:18px;
+
+    top:82px;
+
+    font-size:14px;
+
+    padding:12px 18px;
+
+}
 
 /* ---------- Invitation ---------- */
 
