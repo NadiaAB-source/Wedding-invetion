@@ -3,9 +3,13 @@
 ==================================================*/
 
 *{
+
     margin:0;
+
     padding:0;
+
     box-sizing:border-box;
+
 }
 
 html{
@@ -22,13 +26,13 @@ body{
 
     direction:rtl;
 
-    overflow-x:hidden;
-
-    min-height:100vh;
-
     background:#f8f5ef;
 
     color:#38342d;
+
+    min-height:100vh;
+
+    overflow-x:hidden;
 
     overscroll-behavior:none;
 
@@ -99,9 +103,25 @@ body{
 
     background:
 
-        radial-gradient(circle at 20% 25%,rgba(212,175,55,.08),transparent 35%),
+        radial-gradient(
 
-        radial-gradient(circle at 80% 70%,rgba(144,165,122,.07),transparent 35%);
+            circle at 20% 25%,
+
+            rgba(212,175,55,.08),
+
+            transparent 35%
+
+        ),
+
+        radial-gradient(
+
+            circle at 80% 70%,
+
+            rgba(144,165,122,.07),
+
+            transparent 35%
+
+        );
 
 }
 
@@ -140,7 +160,13 @@ body{
 
         0 10px 25px rgba(0,0,0,.15);
 
-    transition:.3s;
+    transition:
+
+        background .3s,
+
+        color .3s,
+
+        transform .3s;
 
 }
 
@@ -165,9 +191,9 @@ body{
 
 #hero{
 
-    min-height:100svh;
-
     width:100%;
+
+    min-height:100svh;
 
     padding:40px 20px;
 
@@ -193,12 +219,11 @@ body{
 
     font-size:34px;
 
-    color:#60705c;
-
     line-height:2;
 
-}
+    color:#60705c;
 
+}
 
 /*==================================================
     ENVELOPE
@@ -212,11 +237,16 @@ body{
 
     aspect-ratio:520/360;
 
-    perspective:1800px;
-
     margin:0 auto;
 
+    perspective:1800px;
+
 }
+
+
+/*==================================================
+    ENVELOPE BACK
+==================================================*/
 
 .envelope-back{
 
@@ -241,6 +271,11 @@ body{
         0 20px 50px rgba(0,0,0,.08);
 
 }
+
+
+/*==================================================
+    LETTER
+==================================================*/
 
 .letter{
 
@@ -300,6 +335,11 @@ body{
 
 }
 
+
+/*==================================================
+    FLAP
+==================================================*/
+
 .flap{
 
     position:absolute;
@@ -324,6 +364,11 @@ body{
 
 }
 
+
+/*==================================================
+    SEAL
+==================================================*/
+
 .seal{
 
     position:absolute;
@@ -344,15 +389,19 @@ body{
 
         center/cover;
 
-    cursor:pointer;
-
-    z-index:50;
-
     filter:
 
         drop-shadow(0 12px 20px rgba(0,0,0,.18));
 
-    transition:.3s;
+    cursor:pointer;
+
+    z-index:50;
+
+    transition:
+
+        transform .3s,
+
+        filter .3s;
 
 }
 
@@ -368,18 +417,18 @@ body{
 
 
 /*==================================================
-    DECORATION
+    ENVELOPE DECORATION
 ==================================================*/
 
 .envFlowerLeft{
 
     position:absolute;
 
-    width:180px;
+    top:-30px;
 
     left:-55px;
 
-    top:-30px;
+    width:180px;
 
     z-index:25;
 
@@ -391,11 +440,11 @@ body{
 
     position:absolute;
 
-    width:190px;
-
     right:-45px;
 
     bottom:-35px;
+
+    width:190px;
 
     z-index:25;
 
@@ -409,13 +458,13 @@ body{
 
     position:absolute;
 
-    width:170px;
-
-    height:220px;
+    top:-90px;
 
     left:-90px;
 
-    top:-90px;
+    width:170px;
+
+    height:220px;
 
     background:
 
@@ -435,13 +484,13 @@ body{
 
     position:absolute;
 
-    width:190px;
-
-    height:220px;
-
     right:-70px;
 
     bottom:-70px;
+
+    width:190px;
+
+    height:220px;
 
     background:
 
@@ -464,19 +513,21 @@ body{
 
     margin-top:60px;
 
+    text-align:center;
+
     font-family:"Amiri",serif;
 
     font-size:28px;
 
     font-weight:700;
 
-    color:#455846;
-
     line-height:1.5;
 
-    text-align:center;
+    color:#455846;
 
-    text-shadow:0 1px 2px rgba(0,0,0,.08);
+    text-shadow:
+
+        0 1px 2px rgba(0,0,0,.08);
 
     animation:pulse 2.2s infinite;
 
@@ -497,6 +548,7 @@ body{
     }
 
 }
+
 
 
 /*==================================================
@@ -548,11 +600,11 @@ body{
 
     border-radius:20px;
 
+    overflow:hidden;
+
     box-shadow:
 
         0 35px 80px rgba(0,0,0,.12);
-
-    overflow:hidden;
 
 }
 
@@ -577,7 +629,7 @@ body{
 
 
 /*==================================================
-    DECORATIONS
+    CARD DECORATIONS
 ==================================================*/
 
 .card::before{
@@ -642,9 +694,9 @@ body{
 
     width:180px;
 
-    z-index:5;
-
     pointer-events:none;
+
+    z-index:5;
 
 }
 
@@ -658,9 +710,9 @@ body{
 
     width:180px;
 
-    z-index:5;
-
     pointer-events:none;
+
+    z-index:5;
 
 }
 
@@ -668,6 +720,38 @@ body{
 /*==================================================
     HEADINGS
 ==================================================*/
+
+.card h3{
+
+    text-align:center;
+
+    font-family:"Amiri",serif;
+
+    font-size:clamp(30px,5vw,46px);
+
+    color:#b48a2d;
+
+    margin-bottom:25px;
+
+}
+
+.ayah{
+
+    max-width:620px;
+
+    margin:0 auto 22px;
+
+    text-align:center;
+
+    font-family:"Amiri",serif;
+
+    font-size:22px;
+
+    line-height:1.8;
+
+    color:#64755f;
+
+}
 
 .card h1{
 
@@ -699,38 +783,6 @@ body{
 
 }
 
-.card h3{
-
-    text-align:center;
-
-    font-family:"Amiri",serif;
-
-    font-size:clamp(30px,5vw,46px);
-
-    color:#b48a2d;
-
-    margin-bottom:25px;
-
-}
-
-.ayah{
-
-    max-width:620px;
-
-    margin:0 auto 22px;
-
-    text-align:center;
-
-    font-family:"Amiri",serif;
-
-    font-size:22px;
-
-    color:#64755f;
-
-    line-height:1.8;
-
-}
-
 .card p{
 
     max-width:720px;
@@ -745,6 +797,22 @@ body{
 
 }
 
+.inviteText{
+
+    margin-top:12px;
+
+    text-align:center;
+
+    font-family:"Amiri",serif;
+
+    font-size:22px;
+
+    line-height:1.8;
+
+    color:#64755f;
+
+}
+
 
 /*==================================================
     HOSTS
@@ -754,25 +822,23 @@ body{
 
     display:flex;
 
-    justify-content:center;
+    justify-content:space-between;
 
     align-items:flex-start;
 
-    gap:36px;
+    gap:20px;
 
     width:100%;
 
-    max-width:700px;
+    max-width:620px;
 
     margin:0 auto 22px;
-
-    flex-wrap:nowrap;
 
 }
 
 .host{
 
-    flex:1;
+    width:50%;
 
     display:flex;
 
@@ -781,8 +847,6 @@ body{
     align-items:center;
 
     justify-content:flex-start;
-
-    min-width:0;
 
     text-align:center;
 
@@ -806,7 +870,7 @@ body{
 
     font-family:"Amiri",serif;
 
-    font-size:24px;
+    font-size:clamp(18px,2vw,24px);
 
     font-weight:700;
 
@@ -826,9 +890,9 @@ body{
 
     justify-content:center;
 
-    padding-top:22px;
-
     flex:0 0 auto;
+
+    padding-top:22px;
 
     font-family:"Amiri",serif;
 
@@ -837,22 +901,6 @@ body{
     font-weight:700;
 
     color:#b48a2d;
-
-}
-
-.inviteText{
-
-    margin-top:12px;
-
-    text-align:center;
-
-    font-family:"Amiri",serif;
-
-    font-size:22px;
-
-    color:#64755f;
-
-    line-height:1.8;
 
 }
 
@@ -885,9 +933,13 @@ body{
 
     border-radius:18px;
 
-    box-shadow:0 8px 18px rgba(0,0,0,.05);
+    box-shadow:
 
-    transition:.3s;
+        0 8px 18px rgba(0,0,0,.05);
+
+    transition:
+
+        transform .3s;
 
 }
 
@@ -934,7 +986,9 @@ body{
 
     backdrop-filter:blur(10px);
 
-    box-shadow:0 10px 30px rgba(0,0,0,.05);
+    box-shadow:
+
+        0 10px 30px rgba(0,0,0,.05);
 
 }
 
@@ -976,8 +1030,6 @@ body{
 
 }
 
-
-
 /*==================================================
     MOBILE
 ==================================================*/
@@ -994,9 +1046,9 @@ body{
 
     .tapText{
 
-        font-size:22px;
-
         margin-top:40px;
+
+        font-size:22px;
 
     }
 
@@ -1007,6 +1059,32 @@ body{
         width:92vw;
 
         max-width:360px;
+
+    }
+
+    .envelope-back{
+
+        height:70%;
+
+    }
+
+    .letter{
+
+        height:78%;
+
+    }
+
+    .flap{
+
+        height:48%;
+
+    }
+
+    .seal{
+
+        width:78px;
+
+        height:78px;
 
     }
 
@@ -1030,15 +1108,7 @@ body{
 
     }
 
-    .seal{
-
-        width:78px;
-
-        height:78px;
-
-    }
-
-    /* ---------- Card ---------- */
+    /* ---------- Invitation ---------- */
 
     #invitation{
 
@@ -1046,15 +1116,15 @@ body{
 
     }
 
-    .goldBorder{
-
-        inset:12px;
-
-    }
-
     .card{
 
         padding:30px 22px;
+
+    }
+
+    .goldBorder{
+
+        inset:12px;
 
     }
 
@@ -1092,13 +1162,13 @@ body{
 
     .card h1{
 
-        font-size:52px;
+        font-size:clamp(40px,10vw,58px);
 
     }
 
     .card h3{
 
-        font-size:32px;
+        font-size:clamp(28px,6vw,36px);
 
     }
 
@@ -1114,13 +1184,25 @@ body{
 
     }
 
+    .inviteText{
+
+        font-size:19px;
+
+    }
+
     /* ---------- Hosts ---------- */
 
     .hosts{
 
-        gap:18px;
+        gap:12px;
 
         max-width:100%;
+
+    }
+
+    .host{
+
+        width:50%;
 
     }
 
@@ -1132,21 +1214,15 @@ body{
 
     .host .name{
 
-        font-size:18px;
+        font-size:17px;
 
     }
 
     .separator{
 
-        font-size:20px;
+        font-size:18px;
 
         padding-top:18px;
-
-    }
-
-    .inviteText{
-
-        font-size:19px;
 
     }
 
@@ -1178,9 +1254,9 @@ body{
 
     .notes{
 
-        padding:24px 18px;
-
         margin-top:35px;
+
+        padding:24px 18px;
 
     }
 
@@ -1194,13 +1270,13 @@ body{
 
     #musicBtn{
 
-        width:52px;
-
-        height:52px;
-
         left:18px;
 
         top:18px;
+
+        width:52px;
+
+        height:52px;
 
         font-size:22px;
 
@@ -1340,3 +1416,6 @@ body{
     }
 
 }
+
+
+
